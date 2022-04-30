@@ -22,6 +22,7 @@ pipeline {
             steps {
                 script {
                     echo "$rg_name $az_location $vm_size"
+                    echo "ls"
                 }
             }
         }
