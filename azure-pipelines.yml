@@ -10,7 +10,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo Hello, world!
+- script: az login
   displayName: 'Run a one-line script'
 
 - script: |
@@ -18,5 +18,8 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-- script: $azDoPat = Get-StoredCredential -Target $CredentialName 
-            
+- script: |
+    $azureDevopsResourceId = "1c6dd152-2bee-4160-aceb-b503a8ad6e39"
+    $token = az account get-access–token —resource $azureDevopsResourceId | ConvertFrom-Json
+    $authValue = [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes(":" + $token.accessToken))
+      
